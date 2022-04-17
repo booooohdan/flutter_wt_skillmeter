@@ -1,16 +1,26 @@
-# wt_skillmeter
+# War Thunder Skill Meter
 
-A new Flutter project.
+Advanced statistics for War Thunder players
 
-## Getting Started
+## App status
 
-This project is a starting point for a Flutter application.
+* Started: ***18.04.2022***
+* Published: ***---***
+* Status: ***Developing***
+* Version: ***2.0.0***
+ 
+### Used:
 
-A few resources to get you started if this is your first Flutter project:
+* Flutter 2.10.3
+* Dart 2.16.1
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### For debugging:
+Find all "//FIXME:" comment and follow the instruction
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Authors:
+
+* **Bohdan** - *Flutter developer* - [github](https://github.com/booooohdan)
+
+### License:
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LICENSE.md) file for details
