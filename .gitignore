@@ -44,3 +44,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# My rules
+/lib/utilities/ads_collection.dart
+*.keyInfo
+*.keystore
+google-services.json
+GoogleService-Info.plist
