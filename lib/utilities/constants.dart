@@ -15,6 +15,7 @@ const kGreen = Color(0XFF4CEF8D);
 const kRed = Color(0XFFFF876D);
 
 final roboto22blackBold = GoogleFonts.roboto(fontSize: 22, color: kBlackColor, fontWeight: FontWeight.w700);
+final roboto26whiteBold = GoogleFonts.roboto(fontSize: 26, color: Colors.white, fontWeight: FontWeight.w700);
 final roboto14blackBold = GoogleFonts.roboto(fontSize: 14, color: kBlackColor, fontWeight: FontWeight.w700);
 final roboto14whiteSemiBold = GoogleFonts.roboto(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w600);
 final roboto14greyMedium = GoogleFonts.roboto(fontSize: 14, color: kTextGreyColor, fontWeight: FontWeight.w500);

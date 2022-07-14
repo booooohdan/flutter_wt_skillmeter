@@ -1,7 +1,12 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:wt_skillmeter/models/player.dart';
 import 'package:wt_skillmeter/utilities/ads_collection.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -35,20 +40,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final screenSize = MediaQuery.of(context).size;
     final localizations = AppLocalizations.of(context)!;
 
-    return Column(
-      children: [
-        Placeholder(),
-        _isBannerAdReady
-            ? Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: _bannerAd!.size.width.toDouble(),
-                  height: _bannerAd!.size.height.toDouble(),
-                  child: AdWidget(ad: _bannerAd!),
-                ),
-              )
-            : Container(),
-      ],
+    return SafeArea(
+      child: Column(
+        children: [
+          Placeholder(),
+          _isBannerAdReady
+              ? Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: _bannerAd!.size.width.toDouble(),
+                    height: _bannerAd!.size.height.toDouble(),
+                    child: AdWidget(ad: _bannerAd!),
+                  ),
+                )
+              : Container(),
+        ],
+      ),
     );
   }
 
