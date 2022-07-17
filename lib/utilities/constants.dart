@@ -26,3 +26,4 @@ final roboto10whiteRegular = GoogleFonts.roboto(fontSize: 10, color: Colors.whit
 final roboto10blackRegular = GoogleFonts.roboto(fontSize: 10, color: kBlackColor, fontWeight: FontWeight.w400);
 final roboto10redBold = GoogleFonts.roboto(fontSize: 10, color: kRed, fontWeight: FontWeight.w700);
 final roboto10greyRegular = GoogleFonts.roboto(fontSize: 10, color: kTextGreyColor, fontWeight: FontWeight.w400);
+final yanone20whiteRegular = GoogleFonts.yanoneKaffeesatz(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w300);

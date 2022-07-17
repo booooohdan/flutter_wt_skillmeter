@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:wt_skillmeter/models/player.dart';
 
 class GetDataProvider with ChangeNotifier {
@@ -38,12 +39,9 @@ class GetDataProvider with ChangeNotifier {
     final lionsAB = int.tryParse(arcadeBattles[5].replaceAll(',', '').replaceAll('.', '')) ?? 0;
     final lionsRB = int.tryParse(realisticBattles[5].replaceAll(',', '').replaceAll('.', '')) ?? 0;
     final lionsSB = int.tryParse(simulatorBattles[5].replaceAll(',', '').replaceAll('.', '')) ?? 0;
-
-    final lionsEarn = lionsAB + lionsRB + lionsSB;
-    lionsEarn > 1000000 ? lionsEarn.toStringAsFixed(1) : lionsEarn.toString();
-    // final playAB = int.tryParse(arcadeBattles[6]) ?? 0;
-    // final playRB = int.tryParse(realisticBattles[6]) ?? 0;
-    // final playSB = int.tryParse(simulatorBattles[6]) ?? 0;
+    final playAB = parseWtDateTime(arcadeBattles[6]);
+    final playRB = parseWtDateTime(realisticBattles[6]);
+    final playSB = parseWtDateTime(simulatorBattles[6]);
 
     final player = Player(
       nickname: nickname[0],
@@ -54,23 +52,49 @@ class GetDataProvider with ChangeNotifier {
       signUpDate: regDate[0].replaceAll('Registration date ', ''),
       completedMissions: completedAB + completedRB + completedSB,
       lionsEarned: lionsEarned(lionsAB, lionsRB, lionsSB),
-      playTime: '1000',
+      playTime: playAB + playRB + playSB,
+      yearsOld: countAccYears(regDate[0]),
     );
 
     //TODO: Handle possible exception (try/catch)
     log('message');
     return player;
   }
-}
 
-String lionsEarned(int lionsAB, int lionsRB, int lionsSB) {
-  final sum = lionsAB + lionsRB + lionsSB;
+  String lionsEarned(int lionsAB, int lionsRB, int lionsSB) {
+    final sum = lionsAB + lionsRB + lionsSB;
 
-  if (sum > 1000000) {
-    final tempSum = sum / 1000000;
-    return '${tempSum.toStringAsFixed(1)} M';
-  } else {
-    final tempSum = sum / 1000;
-    return '${tempSum.toStringAsFixed(1)} K';
+    if (sum > 1000000) {
+      final tempSum = sum / 1000000;
+      return '${tempSum.toStringAsFixed(1)} M';
+    } else {
+      final tempSum = sum / 1000;
+      return '${tempSum.toStringAsFixed(1)} K';
+    }
+  }
+
+  int parseWtDateTime(String wtDateTime) {
+    if (wtDateTime.contains('M')) {
+      final monthsString = wtDateTime.replaceAll(' M', '');
+      final months = double.tryParse(monthsString) ?? 0;
+      return (months * 730.5).toInt();
+    } else if (wtDateTime.contains('d')) {
+      final daysStrings = wtDateTime.split('d ');
+      final days = double.tryParse(daysStrings[0]) ?? 0;
+      final hours = double.tryParse(daysStrings[1].replaceAll('h', '')) ?? 0;
+      return ((days * 24) + hours).toInt();
+    } else if (wtDateTime.contains('h')) {
+      final hoursString = wtDateTime.split('h ');
+      final hours = double.tryParse(hoursString[0]) ?? 0;
+      return hours.toInt();
+    } else {
+      return 0;
+    }
+  }
+
+  int countAccYears(String regDate) {
+    var parsedDate = DateFormat('dd.MM.yyyy').parse(regDate.replaceAll('Registration date ', ''));
+    var days = DateTime.now().difference(parsedDate).inDays;
+    return (days / 365).toInt();
   }
 }

@@ -60,7 +60,7 @@ Future<void> main() async {
           colorScheme: ColorScheme.fromSwatch(
             primarySwatch: Colors.blueGrey,
           ),
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: Color(0xFFF7F9FC),
           appBarTheme: AppBarTheme(
             color: kLightGreyColor,
             elevation: 0,

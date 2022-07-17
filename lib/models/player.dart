@@ -9,6 +9,7 @@ class Player {
     required this.completedMissions,
     required this.lionsEarned,
     required this.playTime,
+    required this.yearsOld,
   });
 
   String nickname;
@@ -20,7 +21,8 @@ class Player {
 
   int completedMissions;
   String lionsEarned;
-  String playTime;
+  int playTime;
+  int yearsOld;
   // String LionEarned;
   // String TotalTimeSpent;
   // double TotalSkillBackground;
