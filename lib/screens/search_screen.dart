@@ -5,12 +5,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:wt_skillmeter/models/player.dart';
 import 'package:wt_skillmeter/providers/get_data_provider.dart';
 import 'package:wt_skillmeter/utilities/ads_collection.dart';
 import 'package:wt_skillmeter/utilities/constants.dart';
+import 'package:wt_skillmeter/widgets/tile_mode_stats_table.dart';
+import 'package:wt_skillmeter/widgets/tile_radial_gauge.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -119,7 +120,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             ),
                           ],
-                          onSelected: (int value) {},
+                          onSelected: (int value) {
+                            //TODO: Add @live or @psn to nickname
+                          },
                           icon: const FaIcon(
                             FontAwesomeIcons.gamepad,
                             color: Colors.white,
@@ -253,11 +256,50 @@ class _SearchScreenState extends State<SearchScreen> {
                   ],
                 ),
               ),
-              Container(
-                color: Colors.blueGrey,
-                height: 200,
-                width: double.infinity,
-              )
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                child: Row(
+                  children: [
+                    TileRadialGauge(title: 'K/D ratio', value: player?.winRates ?? 0, isKD: true),
+                    const SizedBox(width: 10),
+                    TileRadialGauge(title: 'Win rate', value: player?.winRates ?? 0, isKD: false),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TileModeStatsTable(
+                      title: 'Aviation',
+                      plane: player?.aviationAirDestroyed.toString() ?? '0',
+                      tank: player?.aviationGroundDestroyed.toString() ?? '0',
+                      ship: player?.aviationNavalDestroyed.toString() ?? '0',
+                      time: '${player?.aviationTimePlayed ?? '0'}h',
+                      battles: player?.aviationBattlesPlayed.toString() ?? '0',
+                    ),
+                    const SizedBox(width: 10),
+                    TileModeStatsTable(
+                      title: 'Ground Forces',
+                      plane: player?.groundAirDestroyed.toString() ?? '0',
+                      tank: player?.groundTankDestroyed.toString() ?? '0',
+                      ship: '0',
+                      time: '${player?.groundTimePlayed ?? '0'}h',
+                      battles: player?.groundBattlesPlayed.toString() ?? '0',
+                    ),
+                    const SizedBox(width: 10),
+                    TileModeStatsTable(
+                      title: 'Fleet',
+                      plane: player?.navalAirDestroyed.toString() ?? '0',
+                      tank: '0',
+                      ship: player?.navalShipDestroyed.toString() ?? '0',
+                      time: '${player?.navalTimePlayed ?? '0'}h',
+                      battles: player?.navalBattlesPlayed.toString() ?? '0',
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

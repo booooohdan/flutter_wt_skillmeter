@@ -6,10 +6,36 @@ class Player {
     required this.title,
     required this.level,
     required this.signUpDate,
-    required this.completedMissions,
-    required this.lionsEarned,
-    required this.playTime,
     required this.yearsOld,
+    required this.completedMissionAB,
+    required this.completedMissionRB,
+    required this.completedMissionSB,
+    required this.completedMissions,
+    required this.lionsEarnedAB,
+    required this.lionsEarnedRB,
+    required this.lionsEarnedSB,
+    required this.lionsEarned,
+    required this.playTimeAB,
+    required this.playTimeRB,
+    required this.playTimeSB,
+    required this.playTime,
+    required this.winRatesAB,
+    required this.winRatesRB,
+    required this.winRatesSB,
+    required this.winRates,
+    required this.aviationAirDestroyed,
+    required this.aviationGroundDestroyed,
+    required this.aviationNavalDestroyed,
+    required this.aviationTimePlayed,
+    required this.aviationBattlesPlayed,
+    required this.groundAirDestroyed,
+    required this.groundTankDestroyed,
+    required this.groundTimePlayed,
+    required this.groundBattlesPlayed,
+    required this.navalAirDestroyed,
+    required this.navalShipDestroyed,
+    required this.navalTimePlayed,
+    required this.navalBattlesPlayed,
   });
 
   String nickname;
@@ -18,17 +44,41 @@ class Player {
   String title;
   String level;
   String signUpDate;
-
-  int completedMissions;
-  String lionsEarned;
-  int playTime;
   int yearsOld;
-  // String LionEarned;
-  // String TotalTimeSpent;
-  // double TotalSkillBackground;
-  // String SkillGradient;
-  // String SkillDescription;
-  // String Avatar;
+
+  int completedMissionAB;
+  int completedMissionRB;
+  int completedMissionSB;
+  int completedMissions;
+  int lionsEarnedAB;
+  int lionsEarnedRB;
+  int lionsEarnedSB;
+  String lionsEarned;
+  int playTimeAB;
+  int playTimeRB;
+  int playTimeSB;
+  int playTime;
+
+  int winRatesAB;
+  int winRatesRB;
+  int winRatesSB;
+  double winRates;
+
+  int aviationAirDestroyed;
+  int aviationGroundDestroyed;
+  int aviationNavalDestroyed;
+  int aviationTimePlayed;
+  int aviationBattlesPlayed;
+
+  int groundAirDestroyed;
+  int groundTankDestroyed;
+  int groundTimePlayed;
+  int groundBattlesPlayed;
+
+  int navalAirDestroyed;
+  int navalShipDestroyed;
+  int navalTimePlayed;
+  int navalBattlesPlayed;
 
   // int WinRateAB ;
   // int WinRateRB ;
