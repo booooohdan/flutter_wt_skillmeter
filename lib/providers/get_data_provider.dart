@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:wt_skillmeter/models/killdeath.dart';
 import 'package:wt_skillmeter/models/player.dart';
 
 class GetDataProvider with ChangeNotifier {
@@ -83,6 +84,17 @@ class GetDataProvider with ChangeNotifier {
     final navalBattlesPlayedAB = int.tryParse(arcadeBattles[36]) ?? 0;
     final navalBattlesPlayedRB = int.tryParse(realisticBattles[36]) ?? 0;
 
+    final List<KillDeath> kdList = [
+      KillDeath(killNumber: int.tryParse(arcadeBattles[18]) ?? 0, battleNumber: int.tryParse(arcadeBattles[10]) ?? 1, modeName: 'AirAB'),
+      KillDeath(killNumber: int.tryParse(realisticBattles[18]) ?? 0, battleNumber: int.tryParse(realisticBattles[10]) ?? 1, modeName: 'AirRB'),
+      KillDeath(killNumber: int.tryParse(simulatorBattles[18]) ?? 0, battleNumber: int.tryParse(simulatorBattles[10]) ?? 1, modeName: 'AirSB'),
+      KillDeath(killNumber: int.tryParse(arcadeBattles[32]) ?? 0, battleNumber: int.tryParse(arcadeBattles[22]) ?? 1, modeName: 'TankAB'),
+      KillDeath(killNumber: int.tryParse(realisticBattles[32]) ?? 0, battleNumber: int.tryParse(realisticBattles[22]) ?? 1, modeName: 'TankRB'),
+      KillDeath(killNumber: int.tryParse(simulatorBattles[32]) ?? 0, battleNumber: int.tryParse(simulatorBattles[22]) ?? 1, modeName: 'TankSB'),
+      KillDeath(killNumber: int.tryParse(arcadeBattles[52]) ?? 0, battleNumber: int.tryParse(arcadeBattles[36]) ?? 1, modeName: 'ShipAB'),
+      KillDeath(killNumber: int.tryParse(realisticBattles[52]) ?? 0, battleNumber: int.tryParse(realisticBattles[36]) ?? 1, modeName: 'ShipRB'),
+    ];
+
     final player = Player(
       nickname: nickname[0],
       squadron: squadron.isEmpty ? '' : squadron[0],
@@ -107,6 +119,15 @@ class GetDataProvider with ChangeNotifier {
       winRatesRB: winRateRB,
       winRatesSB: winRateSB,
       winRates: (winRateAB + winRateRB + winRateSB) / 3,
+      kdAirAB: calculateKd(kdList, 'AirAB'),
+      kdAirRB: calculateKd(kdList, 'AirRB'),
+      kdAirSB: calculateKd(kdList, 'AirSB'),
+      kdTankAB: calculateKd(kdList, 'TankAB'),
+      kdTankRB: calculateKd(kdList, 'TankRB'),
+      kdTankSB: calculateKd(kdList, 'TankSB'),
+      kdShipAB: calculateKd(kdList, 'ShipAB'),
+      kdShipRB: calculateKd(kdList, 'ShipRB'),
+      totalKD: totalKd(kdList),
       aviationAirDestroyed: aviationAirDestroyedAB + aviationAirDestroyedRB + aviationAirDestroyedSB,
       aviationGroundDestroyed: aviationGroundDestroyedAB + aviationGroundDestroyedRB + aviationGroundDestroyedSB,
       aviationNavalDestroyed: aviationNavalDestroyedAB + aviationNavalDestroyedRB,
@@ -166,5 +187,33 @@ class GetDataProvider with ChangeNotifier {
     } else {
       return 0;
     }
+  }
+
+  double totalKd(List<KillDeath> kdList) {
+    int totalBattles = 0;
+    double result = 0;
+    final List<KillDeath> importantMode = [];
+
+    for (final e in kdList) {
+      totalBattles = totalBattles + e.battleNumber;
+      e.modeKd = e.killNumber / e.battleNumber;
+    }
+
+    for (final x in kdList) {
+      if (x.battleNumber / totalBattles >= 0.125) {
+        importantMode.add(x);
+      }
+    }
+
+    for (final y in importantMode) {
+      result = result + y.modeKd;
+    }
+
+    return result / importantMode.length;
+  }
+
+  double calculateKd(List<KillDeath> kdList, String modeName) {
+    final mode = kdList.where((e) => e.modeName == modeName).single;
+    return mode.killNumber / mode.battleNumber;
   }
 }

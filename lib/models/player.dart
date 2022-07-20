@@ -23,6 +23,15 @@ class Player {
     required this.winRatesRB,
     required this.winRatesSB,
     required this.winRates,
+    required this.kdAirAB,
+    required this.kdAirRB,
+    required this.kdAirSB,
+    required this.kdTankAB,
+    required this.kdTankRB,
+    required this.kdTankSB,
+    required this.kdShipAB,
+    required this.kdShipRB,
+    required this.totalKD,
     required this.aviationAirDestroyed,
     required this.aviationGroundDestroyed,
     required this.aviationNavalDestroyed,
@@ -58,6 +67,16 @@ class Player {
   int playTimeRB;
   int playTimeSB;
   int playTime;
+
+  double kdAirAB;
+  double kdAirRB;
+  double kdAirSB;
+  double kdTankAB;
+  double kdTankRB;
+  double kdTankSB;
+  double kdShipAB;
+  double kdShipRB;
+  double totalKD;
 
   int winRatesAB;
   int winRatesRB;

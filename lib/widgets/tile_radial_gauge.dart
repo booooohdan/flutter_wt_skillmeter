@@ -39,7 +39,7 @@ class TileRadialGauge extends StatelessWidget {
                     interval: 10,
                     startAngle: 270,
                     endAngle: 270,
-                    maximum: isKD ? 200 : 100,
+                    maximum: isKD ? 2 : 100,
                     showTicks: false,
                     showLabels: false,
                     axisLineStyle: const AxisLineStyle(thickness: 20),
@@ -49,7 +49,7 @@ class TileRadialGauge extends StatelessWidget {
                         width: 20,
                         color: Color.fromARGB(255, 255, 117, 255),
                         enableAnimation: true,
-                        cornerStyle: CornerStyle.bothCurve,
+                        cornerStyle: isKD && value >= 2 ? CornerStyle.bothFlat : CornerStyle.bothCurve,
                       ),
                     ],
                     annotations: [

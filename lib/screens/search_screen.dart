@@ -175,14 +175,23 @@ class _SearchScreenState extends State<SearchScreen> {
                             ],
                           ),
                           const SizedBox(width: 28),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(player?.nickname ?? 'Player', style: roboto26whiteBold),
-                              Text(player?.squadron ?? 'Squadron', style: roboto14whiteSemiBold),
-                              Text(player?.title ?? 'Title', style: roboto14whiteSemiBold),
-                            ],
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(player?.nickname ?? 'Player', style: roboto26whiteBold),
+                                Text(player?.squadron ?? 'Squadron', style: roboto14whiteSemiBold),
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    player?.title ?? 'Title',
+                                    maxLines: 1,
+                                    style: roboto14whiteSemiBold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -232,7 +241,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       children: [
                                         TextSpan(text: player?.lionsEarned.toString() ?? ''),
                                         const TextSpan(text: '\n'),
-                                        TextSpan(text: 'SL', style: yanone20whiteRegular),
+                                        TextSpan(text: 'SILVER LIONS', style: yanone20whiteRegular),
                                       ],
                                     ),
                                   ),
@@ -260,7 +269,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                 child: Row(
                   children: [
-                    TileRadialGauge(title: 'K/D ratio', value: player?.winRates ?? 0, isKD: true),
+                    TileRadialGauge(title: 'K/D ratio', value: player?.totalKD ?? 0, isKD: true),
                     const SizedBox(width: 10),
                     TileRadialGauge(title: 'Win rate', value: player?.winRates ?? 0, isKD: false),
                   ],
@@ -278,6 +287,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ship: player?.aviationNavalDestroyed.toString() ?? '0',
                       time: '${player?.aviationTimePlayed ?? '0'}h',
                       battles: player?.aviationBattlesPlayed.toString() ?? '0',
+                      mode: 'avia',
                     ),
                     const SizedBox(width: 10),
                     TileModeStatsTable(
@@ -287,6 +297,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ship: '0',
                       time: '${player?.groundTimePlayed ?? '0'}h',
                       battles: player?.groundBattlesPlayed.toString() ?? '0',
+                      mode: 'tank',
                     ),
                     const SizedBox(width: 10),
                     TileModeStatsTable(
@@ -296,6 +307,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ship: player?.navalShipDestroyed.toString() ?? '0',
                       time: '${player?.navalTimePlayed ?? '0'}h',
                       battles: player?.navalBattlesPlayed.toString() ?? '0',
+                      mode: 'ship',
                     ),
                   ],
                 ),

@@ -10,6 +10,7 @@ class TileModeStatsTable extends StatelessWidget {
     required this.ship,
     required this.time,
     required this.battles,
+    required this.mode,
   }) : super(key: key);
 
   final String title;
@@ -18,6 +19,7 @@ class TileModeStatsTable extends StatelessWidget {
   final String ship;
   final String time;
   final String battles;
+  final String mode;
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +34,14 @@ class TileModeStatsTable extends StatelessWidget {
           children: [
             Text(title, style: roboto14darkGreyMedium),
             const SizedBox(height: 10),
-            plane != '0'
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset('assets/plane.png', height: 30),
-                      Text(plane, style: roboto14darkGreyMedium),
-                    ],
-                  )
-                : Container(),
-            tank != '0'
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset('assets/plane.png', height: 30),
+                Text(plane, style: roboto14darkGreyMedium),
+              ],
+            ),
+            mode != 'ship'
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -50,7 +50,7 @@ class TileModeStatsTable extends StatelessWidget {
                     ],
                   )
                 : Container(),
-            ship != '0'
+            mode != 'tank'
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
