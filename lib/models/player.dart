@@ -1,3 +1,5 @@
+import 'package:wt_skillmeter/models/chart_data.dart';
+
 class Player {
   Player({
     required this.nickname,
@@ -45,6 +47,9 @@ class Player {
     required this.navalShipDestroyed,
     required this.navalTimePlayed,
     required this.navalBattlesPlayed,
+    required this.gameModesChart,
+    required this.typeOfVehicleChart,
+    required this.researchedVehicleChart,
   });
 
   String nickname;
@@ -99,67 +104,9 @@ class Player {
   int navalTimePlayed;
   int navalBattlesPlayed;
 
-  // int WinRateAB ;
-  // int WinRateRB ;
-  // int WinRateSB ;
+  List<ChartData> gameModesChart;
+  List<ChartData> typeOfVehicleChart;
+  List<ChartData> researchedVehicleChart;
 
-  // double KD_AAB ;
-  // double KD_ARB ;
-  // double KD_ASB ;
-  // double KD_TAB ;
-  // double KD_TRB ;
-  // double KD_TSB ;
-  // double KD_SAB ;
-  // double KD_SRB ;
-
-  // int CountAAB ;
-  // int CountARB ;
-  // int CountASB ;
-  // int CountTAB ;
-  // int CountTRB ;
-  // int CountTSB ;
-  // int CountSAB ;
-  // int CountSRB ;
-
-  // double FavoriteVehicle1 ;
-  // double FavoriteVehicle2 ;
-  // double FavoriteVehicle3 ;
-  // double FavoriteVehicle4 ;
-  // double FavoriteVehicle5 ;
-
-  // String FavoriteVehicleName1 ;
-  // String FavoriteVehicleName2 ;
-  // String FavoriteVehicleName3 ;
-  // String FavoriteVehicleName4 ;
-  // String FavoriteVehicleName5 ;
-
-  // String FavoriteVehicleIcon1 ;
-  // String FavoriteVehicleIcon2 ;
-  // String FavoriteVehicleIcon3 ;
-  // String FavoriteVehicleIcon4 ;
-  // String FavoriteVehicleIcon5 ;
-
-  // int MissionFighter ;
-  // int MissionAttacker ;
-  // int MissionBomber ;
-  // int MissionMTank ;
-  // int MissionHTank ;
-  // int MissionSPAA ;
-  // int MissionDestroyer ;
-  // int MissionBoats ;
-  // int MissionBarge ;
-  // int MissionFrigate ;
-  // int MissionDestroyerShip ;
-  // //int MissionDestroyerCruiser ;
-  // //int MissionDestroyerBattleShip ;
-
-  // int ResearchedUSA ;
-  // int ResearchedGermany ;
-  // int ResearchedUSSR ;
-  // int ResearchedBritain ;
-  // int ResearchedJapan ;
-  // int ResearchedItaly ;
-  // int ResearchedFrance ;
-  // int ResearchedChina ;
-  // int ResearchedSweden ;
+  //TODO: Refactor to list where available
 }

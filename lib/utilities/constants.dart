@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//TODO: Add color constants
+
 const kIconGreyColor = Color(0XFF647281);
 const kTextGreyColor = Color(0XFF9DA5B6);
 const kButtonGreyColor = Color(0XFFE8EAEC);

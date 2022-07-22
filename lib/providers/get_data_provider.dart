@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:wt_skillmeter/models/chart_data.dart';
 import 'package:wt_skillmeter/models/killdeath.dart';
 import 'package:wt_skillmeter/models/player.dart';
 
@@ -84,6 +85,79 @@ class GetDataProvider with ChangeNotifier {
     final navalBattlesPlayedAB = int.tryParse(arcadeBattles[36]) ?? 0;
     final navalBattlesPlayedRB = int.tryParse(realisticBattles[36]) ?? 0;
 
+    final fighterBattlesPlayedAB = int.tryParse(arcadeBattles[11]) ?? 0;
+    final fighterBattlesPlayedRB = int.tryParse(realisticBattles[11]) ?? 0;
+    final fighterBattlesPlayedSB = int.tryParse(simulatorBattles[11]) ?? 0;
+    final strikeBattlesPlayedAB = int.tryParse(arcadeBattles[13]) ?? 0;
+    final strikeBattlesPlayedRB = int.tryParse(realisticBattles[13]) ?? 0;
+    final strikeBattlesPlayedSB = int.tryParse(simulatorBattles[13]) ?? 0;
+    final bomberBattlesPlayedAB = int.tryParse(arcadeBattles[12]) ?? 0;
+    final bomberBattlesPlayedRB = int.tryParse(realisticBattles[12]) ?? 0;
+    final bomberBattlesPlayedSB = int.tryParse(simulatorBattles[12]) ?? 0;
+    final fighterBattlesPlayed = fighterBattlesPlayedAB + fighterBattlesPlayedRB + fighterBattlesPlayedSB;
+    final strikeBattlesPlayed = strikeBattlesPlayedAB + strikeBattlesPlayedRB + strikeBattlesPlayedSB;
+    final bomberBattlesPlayed = bomberBattlesPlayedAB + bomberBattlesPlayedRB + bomberBattlesPlayedSB;
+
+    final tankBattlesPlayedAB = int.tryParse(arcadeBattles[23]) ?? 0;
+    final tankBattlesPlayedRB = int.tryParse(realisticBattles[23]) ?? 0;
+    final tankBattlesPlayedSB = int.tryParse(simulatorBattles[23]) ?? 0;
+    final heavyTankBattlesPlayedAB = int.tryParse(arcadeBattles[25]) ?? 0;
+    final heavyTankBattlesPlayedRB = int.tryParse(realisticBattles[25]) ?? 0;
+    final heavyTankBattlesPlayedSB = int.tryParse(simulatorBattles[25]) ?? 0;
+    final spgBattlesPlayedAB = int.tryParse(arcadeBattles[24]) ?? 0;
+    final spgBattlesPlayedRB = int.tryParse(realisticBattles[24]) ?? 0;
+    final spgBattlesPlayedSB = int.tryParse(simulatorBattles[24]) ?? 0;
+    final spaaBattlesPlayedAB = int.tryParse(arcadeBattles[26]) ?? 0;
+    final spaaBattlesPlayedRB = int.tryParse(realisticBattles[26]) ?? 0;
+    final spaaBattlesPlayedSB = int.tryParse(simulatorBattles[26]) ?? 0;
+    final tankBattlesPlayed = tankBattlesPlayedAB + tankBattlesPlayedRB + tankBattlesPlayedSB;
+    final heavyTankBattlesPlayed = heavyTankBattlesPlayedAB + heavyTankBattlesPlayedRB + heavyTankBattlesPlayedSB;
+    final spgBattlesPlayed = spgBattlesPlayedAB + spgBattlesPlayedRB + spgBattlesPlayedSB;
+    final spaaBattlesPlayed = spaaBattlesPlayedAB + spaaBattlesPlayedRB + spaaBattlesPlayedSB;
+
+    final mtboatsBattlesPlayedAB = int.tryParse(arcadeBattles[38]) ?? 0;
+    final mtboatsBattlesPlayedRB = int.tryParse(realisticBattles[38]) ?? 0;
+    final mgboatsBattlesPlayedAB = int.tryParse(arcadeBattles[39]) ?? 0;
+    final mgboatsBattlesPlayedRB = int.tryParse(realisticBattles[39]) ?? 0;
+    final mtgboatsBattlesPlayedAB = int.tryParse(arcadeBattles[40]) ?? 0;
+    final mtgboatsBattlesPlayedRB = int.tryParse(realisticBattles[40]) ?? 0;
+    final subshaserBattlesPlayedAB = int.tryParse(arcadeBattles[41]) ?? 0;
+    final subshaserBattlesPlayedRB = int.tryParse(realisticBattles[41]) ?? 0;
+    final bargeBattlesPlayedAB = int.tryParse(arcadeBattles[43]) ?? 0;
+    final bargeBattlesPlayedRB = int.tryParse(realisticBattles[43]) ?? 0;
+    final destroyerBattlesPlayedAB = int.tryParse(arcadeBattles[42]) ?? 0;
+    final destroyerBattlesPlayedRB = int.tryParse(realisticBattles[42]) ?? 0;
+    final coastalBattlesPlayed = mtboatsBattlesPlayedAB +
+        mtboatsBattlesPlayedRB +
+        mgboatsBattlesPlayedAB +
+        mgboatsBattlesPlayedRB +
+        mtgboatsBattlesPlayedAB +
+        mtgboatsBattlesPlayedRB +
+        subshaserBattlesPlayedAB +
+        subshaserBattlesPlayedRB +
+        bargeBattlesPlayedAB +
+        bargeBattlesPlayedRB;
+    final bluewaterBattlesPlayed = destroyerBattlesPlayedAB + destroyerBattlesPlayedRB;
+
+    final usaResearchedVehicles = int.tryParse(vehiclesAndRewards[1]) ?? 0;
+    final usaSpadedVehicles = int.tryParse(vehiclesAndRewards[11]) ?? 0;
+    final germanyResearchedVehicles = int.tryParse(vehiclesAndRewards[4]) ?? 0;
+    final germanySpadedVehicles = int.tryParse(vehiclesAndRewards[14]) ?? 0;
+    final ussrResearchedVehicles = int.tryParse(vehiclesAndRewards[2]) ?? 0;
+    final ussrSpadedVehicles = int.tryParse(vehiclesAndRewards[12]) ?? 0;
+    final britainResearchedVehicles = int.tryParse(vehiclesAndRewards[3]) ?? 0;
+    final britainSpadedVehicles = int.tryParse(vehiclesAndRewards[13]) ?? 0;
+    final japanResearchedVehicles = int.tryParse(vehiclesAndRewards[5]) ?? 0;
+    final japanSpadedVehicles = int.tryParse(vehiclesAndRewards[15]) ?? 0;
+    final italyResearchedVehicles = int.tryParse(vehiclesAndRewards[6]) ?? 0;
+    final italySpadedVehicles = int.tryParse(vehiclesAndRewards[16]) ?? 0;
+    final franceResearchedVehicles = int.tryParse(vehiclesAndRewards[7]) ?? 0;
+    final franceSpadedVehicles = int.tryParse(vehiclesAndRewards[17]) ?? 0;
+    final chinaResearchedVehicles = int.tryParse(vehiclesAndRewards[8]) ?? 0;
+    final chinaSpadedVehicles = int.tryParse(vehiclesAndRewards[18]) ?? 0;
+    final swedenResearchedVehicles = int.tryParse(vehiclesAndRewards[9]) ?? 0;
+    final swedenSpadedVehicles = int.tryParse(vehiclesAndRewards[19]) ?? 0;
+
     final List<KillDeath> kdList = [
       KillDeath(killNumber: int.tryParse(arcadeBattles[18]) ?? 0, battleNumber: int.tryParse(arcadeBattles[10]) ?? 1, modeName: 'AirAB'),
       KillDeath(killNumber: int.tryParse(realisticBattles[18]) ?? 0, battleNumber: int.tryParse(realisticBattles[10]) ?? 1, modeName: 'AirRB'),
@@ -95,11 +169,46 @@ class GetDataProvider with ChangeNotifier {
       KillDeath(killNumber: int.tryParse(realisticBattles[52]) ?? 0, battleNumber: int.tryParse(realisticBattles[36]) ?? 1, modeName: 'ShipRB'),
     ];
 
+    final List<ChartData> battleNumbersChart = [
+      ChartData(x: 'Air AB', y: aviationBattlesPlayedAB, color: Color(0xFF4FBEFF)),
+      ChartData(x: 'Air RB', y: aviationBattlesPlayedRB, color: Color(0xFF1792D9)),
+      ChartData(x: 'Air SB', y: aviationBattlesPlayedSB, color: Color(0xFF004FBE)),
+      ChartData(x: 'Tank AB', y: groundBattlesPlayedAB, color: Color(0xFF84FF5E)),
+      ChartData(x: 'Tank RB', y: groundBattlesPlayedRB, color: Color(0xFF1BC516)),
+      ChartData(x: 'Tank SB', y: groundBattlesPlayedSB, color: Color(0xFF06842A)),
+      ChartData(x: 'Fleet AB', y: navalBattlesPlayedAB, color: Color(0xFF12B9BF)),
+      ChartData(x: 'Fleet RB', y: navalBattlesPlayedRB, color: Color(0xFF177477)),
+    ];
+
+    final List<ChartData> typeOfVehicleChart = [
+      ChartData(x: 'Fighter', y: fighterBattlesPlayed, color: Color(0xFF4FBEFF)),
+      ChartData(x: 'Strike', y: strikeBattlesPlayed, color: Color(0xFF1792D9)),
+      ChartData(x: 'Bomber', y: bomberBattlesPlayed, color: Color(0xFF004FBE)),
+      ChartData(x: 'Tank', y: tankBattlesPlayed, color: Color(0xFF84FF5E)),
+      ChartData(x: 'Heavy Tank', y: heavyTankBattlesPlayed, color: Color(0xFF1BC516)),
+      ChartData(x: 'SPG', y: spgBattlesPlayed, color: Color(0xFF12B9BF)),
+      ChartData(x: 'SPAA', y: spaaBattlesPlayed, color: Color(0xFF06842A)),
+      ChartData(x: 'Coastal Fleet', y: coastalBattlesPlayed, color: Color(0xFF177477)),
+      ChartData(x: 'Bluewater Fleet', y: bluewaterBattlesPlayed, color: Color(0xFF9D3D7F)),
+    ];
+
+    final List<ChartData> researchedVehicleChart = <ChartData>[
+      ChartData(x: 'SWE', y: 95, y1: swedenResearchedVehicles, y2: swedenSpadedVehicles),
+      ChartData(x: 'CHI', y: 126, y1: chinaResearchedVehicles, y2: chinaSpadedVehicles),
+      ChartData(x: 'FRA', y: 145, y1: franceResearchedVehicles, y2: franceSpadedVehicles),
+      ChartData(x: 'ITA', y: 174, y1: italyResearchedVehicles, y2: italySpadedVehicles),
+      ChartData(x: 'JAP', y: 219, y1: japanResearchedVehicles, y2: japanSpadedVehicles),
+      ChartData(x: 'GBR', y: 294, y1: britainResearchedVehicles, y2: britainSpadedVehicles),
+      ChartData(x: 'USR', y: 368, y1: ussrResearchedVehicles, y2: ussrSpadedVehicles),
+      ChartData(x: 'GER', y: 340, y1: germanyResearchedVehicles, y2: germanySpadedVehicles),
+      ChartData(x: 'USA', y: 326, y1: usaResearchedVehicles, y2: usaSpadedVehicles),
+    ];
+
     final player = Player(
       nickname: nickname[0],
       squadron: squadron.isEmpty ? '' : squadron[0],
       avatar: 'https:${avatar[0]}',
-      title: titleAndLevel[0],
+      title: '${titleAndLevel[0]} ',
       level: titleAndLevel[1],
       signUpDate: regDate[0].replaceAll('Registration date ', ''),
       yearsOld: countAccYears(regDate[0]),
@@ -141,6 +250,9 @@ class GetDataProvider with ChangeNotifier {
       navalShipDestroyed: navalShipDestroyedAB + navalShipDestroyedRB,
       navalTimePlayed: navalTimePlayedAB + navalTimePlayedRB,
       navalBattlesPlayed: navalBattlesPlayedAB + navalBattlesPlayedRB,
+      gameModesChart: battleNumbersChart,
+      typeOfVehicleChart: typeOfVehicleChart,
+      researchedVehicleChart: researchedVehicleChart,
     );
 
     //TODO: Handle possible exception (try/catch)

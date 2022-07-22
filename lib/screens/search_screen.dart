@@ -5,13 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:wt_skillmeter/models/player.dart';
 import 'package:wt_skillmeter/providers/get_data_provider.dart';
 import 'package:wt_skillmeter/utilities/ads_collection.dart';
 import 'package:wt_skillmeter/utilities/constants.dart';
+import 'package:wt_skillmeter/widgets/tile_doughnut_chart.dart';
 import 'package:wt_skillmeter/widgets/tile_mode_stats_table.dart';
 import 'package:wt_skillmeter/widgets/tile_radial_gauge.dart';
+import 'package:wt_skillmeter/widgets/tile_stacked_bar_chart.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -55,7 +56,8 @@ class _SearchScreenState extends State<SearchScreen> {
     final screenSize = MediaQuery.of(context).size;
     final localizations = AppLocalizations.of(context)!;
     Color mainColor = Colors.green;
-
+//TODO: Separate to widgets
+//TODO: Add translation
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -93,7 +95,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               value: 0,
                               child: Row(
                                 children: [
-                                  const FaIcon(FontAwesomeIcons.mouse),
+                                  const FaIcon(FontAwesomeIcons.computerMouse),
                                   SizedBox(width: screenSize.width / 25),
                                   const Text('PC'),
                                 ],
@@ -183,10 +185,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                 Text(player?.nickname ?? 'Player', style: roboto26whiteBold),
                                 Text(player?.squadron ?? 'Squadron', style: roboto14whiteSemiBold),
                                 FittedBox(
-                                  fit: BoxFit.scaleDown,
+                                  fit: BoxFit.fitWidth,
                                   child: Text(
                                     player?.title ?? 'Title',
-                                    maxLines: 1,
+                                    //maxLines: 1,
                                     style: roboto14whiteSemiBold,
                                   ),
                                 ),
@@ -312,6 +314,31 @@ class _SearchScreenState extends State<SearchScreen> {
                   ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                child: Row(
+                  children: [
+                    TileDoughnutChart(
+                      title: 'Game modes',
+                      listData: player?.gameModesChart ?? [],
+                    ),
+                    const SizedBox(width: 10),
+                    TileDoughnutChart(
+                      title: 'Vehicles preferences',
+                      listData: player?.typeOfVehicleChart ?? [],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                child: Row(children: [
+                  TileStackedBarChart(
+                    title: 'Vehicle preference',
+                    listData: player?.researchedVehicleChart ?? [],
+                  ),
+                ]),
+              )
             ],
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 
 List<PageViewModel> getIntroductionPages(BuildContext context) {
   final localizations = AppLocalizations.of(context)!;
+  //TODO: Add introduction screen
   return [
     PageViewModel(
         image: Image.asset(

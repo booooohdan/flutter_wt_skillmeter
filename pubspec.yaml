@@ -34,6 +34,7 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   #Syncfusion
   syncfusion_flutter_gauges: ^20.2.38
+  syncfusion_flutter_charts: ^20.2.38
   #Feedback screen
   package_info_plus: ^1.4.2
   device_info_plus: ^4.0.0
