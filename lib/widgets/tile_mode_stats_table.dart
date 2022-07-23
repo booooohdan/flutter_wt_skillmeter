@@ -37,7 +37,7 @@ class TileModeStatsTable extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset('assets/plane.png', height: 30),
+                Image.asset('assets/gameModes/plane.png', height: 30),
                 Text(plane, style: roboto14darkGreyMedium),
               ],
             ),
@@ -45,7 +45,7 @@ class TileModeStatsTable extends StatelessWidget {
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset('assets/tank.png', height: 30),
+                      Image.asset('assets/gameModes/tank.png', height: 30),
                       Text(tank, style: roboto14darkGreyMedium),
                     ],
                   )
@@ -54,7 +54,7 @@ class TileModeStatsTable extends StatelessWidget {
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset('assets/ship.png', height: 30),
+                      Image.asset('assets/gameModes/ship.png', height: 30),
                       Text(ship, style: roboto14darkGreyMedium),
                     ],
                   )
@@ -62,14 +62,14 @@ class TileModeStatsTable extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset('assets/clock.png', height: 30),
+                Image.asset('assets/gameModes/clock.png', height: 30),
                 Text(time, style: roboto14darkGreyMedium),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset('assets/sword.png', height: 30),
+                Image.asset('assets/gameModes/sword.png', height: 30),
                 Text(battles, style: roboto14darkGreyMedium),
               ],
             ),

@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:wt_skillmeter/models/chart_data.dart';
 import 'package:wt_skillmeter/models/player.dart';
 import 'package:wt_skillmeter/providers/get_data_provider.dart';
 import 'package:wt_skillmeter/utilities/ads_collection.dart';
@@ -139,6 +141,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ],
                     ),
+                    // TODO: Made animation progress
+                    LinearProgressIndicator(),
+                    const SizedBox(height: 15),
                     Container(
                       height: screenSize.width / 4.2,
                       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -198,13 +203,14 @@ class _SearchScreenState extends State<SearchScreen> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 15),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Row(
                         children: [
                           const Icon(Icons.edit_calendar, color: Colors.white),
                           const SizedBox(width: 8),
-                          Text(player?.signUpDate ?? 'Sign Up date', style: roboto14whiteSemiBold),
+                          Text(player?.signUpDate ?? 'Sign Up Date', style: roboto14whiteSemiBold),
                           const Spacer(),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -217,53 +223,112 @@ class _SearchScreenState extends State<SearchScreen> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 15),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: IntrinsicHeight(
-                        child: player?.completedMissions != null
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                style: roboto26whiteBold,
                                 children: [
-                                  RichText(
-                                    textAlign: TextAlign.center,
-                                    text: TextSpan(
-                                      style: roboto26whiteBold,
-                                      children: [
-                                        TextSpan(text: player?.completedMissions.toString() ?? ''),
-                                        const TextSpan(text: '\n'),
-                                        TextSpan(text: 'BATTLES', style: yanone20whiteRegular),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(width: 1, color: Colors.white),
-                                  RichText(
-                                    textAlign: TextAlign.center,
-                                    text: TextSpan(
-                                      style: roboto26whiteBold,
-                                      children: [
-                                        TextSpan(text: player?.lionsEarned.toString() ?? ''),
-                                        const TextSpan(text: '\n'),
-                                        TextSpan(text: 'SILVER LIONS', style: yanone20whiteRegular),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(width: 1, color: Colors.white),
-                                  RichText(
-                                    textAlign: TextAlign.center,
-                                    text: TextSpan(
-                                      style: roboto26whiteBold,
-                                      children: [
-                                        TextSpan(text: player?.playTime.toString() ?? ''),
-                                        const TextSpan(text: '\n'),
-                                        TextSpan(text: 'HOURS', style: yanone20whiteRegular),
-                                      ],
-                                    ),
-                                  ),
+                                  TextSpan(text: player?.completedMissions.toString() ?? '0'),
+                                  const TextSpan(text: '\n'),
+                                  TextSpan(text: 'BATTLES', style: yanone20whiteRegular),
                                 ],
-                              )
-                            : Container(),
+                              ),
+                            ),
+                            Container(width: 1, color: Colors.white),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                style: roboto26whiteBold,
+                                children: [
+                                  TextSpan(text: player?.lionsEarned.toString() ?? '0'),
+                                  const TextSpan(text: '\n'),
+                                  TextSpan(text: 'SILVER LIONS', style: yanone20whiteRegular),
+                                ],
+                              ),
+                            ),
+                            Container(width: 1, color: Colors.white),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                style: roboto26whiteBold,
+                                children: [
+                                  TextSpan(text: player?.playTime.toString() ?? '0'),
+                                  const TextSpan(text: '\n'),
+                                  TextSpan(text: 'HOURS', style: yanone20whiteRegular),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 15),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/hexagon.svg',
+                                height: screenSize.width / 7,
+                                color: Colors.white,
+                              ),
+                              Text(player?.favoriteGameMode ?? 'AAA', style: roboto22blackBold),
+                            ],
+                          ),
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/hexagon.svg',
+                                height: screenSize.width / 7,
+                                color: Colors.white,
+                              ),
+                              Image.asset(
+                                'assets/vehicleTypes/${player?.favoriteVehicleType ?? 'Fighter'}.png',
+                                height: screenSize.width / 10,
+                              ),
+                            ],
+                          ),
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/hexagon.svg',
+                                height: screenSize.width / 7,
+                                color: Colors.white,
+                              ),
+                              SvgPicture.asset(
+                                'assets/flags/${player?.favoriteNation ?? 'usa'}.svg',
+                                height: screenSize.width / 14,
+                              ),
+                            ],
+                          ),
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/hexagon.svg',
+                                height: screenSize.width / 7,
+                                color: Colors.white,
+                              ),
+                              Text('${player?.spadedPercent ?? '0'}%', style: roboto22blackBold),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 15),
                   ],
                 ),
               ),
@@ -271,9 +336,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                 child: Row(
                   children: [
-                    TileRadialGauge(title: 'K/D ratio', value: player?.totalKD ?? 0, isKD: true),
+                    TileRadialGauge(title: 'K/D Ratio', value: player?.totalKD ?? 0, isKD: true),
                     const SizedBox(width: 10),
-                    TileRadialGauge(title: 'Win rate', value: player?.winRates ?? 0, isKD: false),
+                    TileRadialGauge(title: 'Win Rate', value: player?.winRates ?? 0, isKD: false),
                   ],
                 ),
               ),
@@ -320,22 +385,35 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     TileDoughnutChart(
                       title: 'Game modes',
-                      listData: player?.gameModesChart ?? [],
+                      listData: player?.gameModesChart ??
+                          [
+                            ChartData(x: 'Label', y: 1, color: Color(0xFF898A8B)),
+                            ChartData(x: 'Label', y: 1, color: Color(0xFF494949)),
+                            ChartData(x: 'Label', y: 1, color: Color(0xFFC1C1C1)),
+                          ],
                     ),
                     const SizedBox(width: 10),
                     TileDoughnutChart(
-                      title: 'Vehicles preferences',
-                      listData: player?.typeOfVehicleChart ?? [],
+                      title: 'Favorite Vehicle Type',
+                      listData: player?.typeOfVehicleChart ??
+                          [
+                            ChartData(x: 'Label', y: 1, color: Color(0xFF898A8B)),
+                            ChartData(x: 'Label', y: 1, color: Color(0xFF494949)),
+                            ChartData(x: 'Label', y: 1, color: Color(0xFFC1C1C1)),
+                          ],
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                padding: const EdgeInsets.all(10),
                 child: Row(children: [
                   TileStackedBarChart(
-                    title: 'Vehicle preference',
-                    listData: player?.researchedVehicleChart ?? [],
+                    title: 'Researched Vehicle',
+                    listData: player?.researchedVehicleChart ??
+                        [
+                          ChartData(x: 'NAT', y: 3, y1: 2, y2: 1),
+                        ],
                   ),
                 ]),
               )

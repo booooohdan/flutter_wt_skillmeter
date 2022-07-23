@@ -50,6 +50,10 @@ class Player {
     required this.gameModesChart,
     required this.typeOfVehicleChart,
     required this.researchedVehicleChart,
+    required this.favoriteGameMode,
+    required this.favoriteVehicleType,
+    required this.favoriteNation,
+    required this.spadedPercent,
   });
 
   String nickname;
@@ -107,6 +111,11 @@ class Player {
   List<ChartData> gameModesChart;
   List<ChartData> typeOfVehicleChart;
   List<ChartData> researchedVehicleChart;
+
+  String favoriteGameMode;
+  String favoriteVehicleType;
+  String favoriteNation;
+  int spadedPercent;
 
   //TODO: Refactor to list where available
 }

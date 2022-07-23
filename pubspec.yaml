@@ -32,6 +32,7 @@ dependencies:
   #Icons
   cupertino_icons: ^1.0.5
   font_awesome_flutter: ^10.1.0
+  flutter_svg: ^1.1.1+1
   #Syncfusion
   syncfusion_flutter_gauges: ^20.2.38
   syncfusion_flutter_charts: ^20.2.38
@@ -82,3 +83,6 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/gameModes/
+    - assets/vehicleTypes/
+    - assets/flags/

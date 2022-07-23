@@ -21,7 +21,7 @@ class GetDataProvider with ChangeNotifier {
   // }
 
   Future<Player> getPlayerDataFromWebsite(String playerNickname) async {
-    final url = Uri.parse('https://warthunder.com/en/community/userinfo/?nick=$playerNickname');
+    final url = Uri.parse('https://warthunder.com/en/community/userinfo/?nick=${playerNickname.trim()}');
     final response = await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
     final html = dom.Document.html(response.body);
 
@@ -159,14 +159,14 @@ class GetDataProvider with ChangeNotifier {
     final swedenSpadedVehicles = int.tryParse(vehiclesAndRewards[19]) ?? 0;
 
     final List<KillDeath> kdList = [
-      KillDeath(killNumber: int.tryParse(arcadeBattles[18]) ?? 0, battleNumber: int.tryParse(arcadeBattles[10]) ?? 1, modeName: 'AirAB'),
-      KillDeath(killNumber: int.tryParse(realisticBattles[18]) ?? 0, battleNumber: int.tryParse(realisticBattles[10]) ?? 1, modeName: 'AirRB'),
-      KillDeath(killNumber: int.tryParse(simulatorBattles[18]) ?? 0, battleNumber: int.tryParse(simulatorBattles[10]) ?? 1, modeName: 'AirSB'),
-      KillDeath(killNumber: int.tryParse(arcadeBattles[32]) ?? 0, battleNumber: int.tryParse(arcadeBattles[22]) ?? 1, modeName: 'TankAB'),
-      KillDeath(killNumber: int.tryParse(realisticBattles[32]) ?? 0, battleNumber: int.tryParse(realisticBattles[22]) ?? 1, modeName: 'TankRB'),
-      KillDeath(killNumber: int.tryParse(simulatorBattles[32]) ?? 0, battleNumber: int.tryParse(simulatorBattles[22]) ?? 1, modeName: 'TankSB'),
-      KillDeath(killNumber: int.tryParse(arcadeBattles[52]) ?? 0, battleNumber: int.tryParse(arcadeBattles[36]) ?? 1, modeName: 'ShipAB'),
-      KillDeath(killNumber: int.tryParse(realisticBattles[52]) ?? 0, battleNumber: int.tryParse(realisticBattles[36]) ?? 1, modeName: 'ShipRB'),
+      KillDeath(killNumber: int.tryParse(arcadeBattles[18]) ?? 0, battleNumber: int.tryParse(arcadeBattles[10]) ?? 1, modeName: 'AAB'),
+      KillDeath(killNumber: int.tryParse(realisticBattles[18]) ?? 0, battleNumber: int.tryParse(realisticBattles[10]) ?? 1, modeName: 'ARB'),
+      KillDeath(killNumber: int.tryParse(simulatorBattles[18]) ?? 0, battleNumber: int.tryParse(simulatorBattles[10]) ?? 1, modeName: 'ASB'),
+      KillDeath(killNumber: int.tryParse(arcadeBattles[32]) ?? 0, battleNumber: int.tryParse(arcadeBattles[22]) ?? 1, modeName: 'TAB'),
+      KillDeath(killNumber: int.tryParse(realisticBattles[32]) ?? 0, battleNumber: int.tryParse(realisticBattles[22]) ?? 1, modeName: 'TRB'),
+      KillDeath(killNumber: int.tryParse(simulatorBattles[32]) ?? 0, battleNumber: int.tryParse(simulatorBattles[22]) ?? 1, modeName: 'TSB'),
+      KillDeath(killNumber: int.tryParse(arcadeBattles[52]) ?? 0, battleNumber: int.tryParse(arcadeBattles[36]) ?? 1, modeName: 'FAB'),
+      KillDeath(killNumber: int.tryParse(realisticBattles[52]) ?? 0, battleNumber: int.tryParse(realisticBattles[36]) ?? 1, modeName: 'FRB'),
     ];
 
     final List<ChartData> battleNumbersChart = [
@@ -228,14 +228,14 @@ class GetDataProvider with ChangeNotifier {
       winRatesRB: winRateRB,
       winRatesSB: winRateSB,
       winRates: (winRateAB + winRateRB + winRateSB) / 3,
-      kdAirAB: calculateKd(kdList, 'AirAB'),
-      kdAirRB: calculateKd(kdList, 'AirRB'),
-      kdAirSB: calculateKd(kdList, 'AirSB'),
-      kdTankAB: calculateKd(kdList, 'TankAB'),
-      kdTankRB: calculateKd(kdList, 'TankRB'),
-      kdTankSB: calculateKd(kdList, 'TankSB'),
-      kdShipAB: calculateKd(kdList, 'ShipAB'),
-      kdShipRB: calculateKd(kdList, 'ShipRB'),
+      kdAirAB: calculateKd(kdList, 'AAB'),
+      kdAirRB: calculateKd(kdList, 'ARB'),
+      kdAirSB: calculateKd(kdList, 'ASB'),
+      kdTankAB: calculateKd(kdList, 'TAB'),
+      kdTankRB: calculateKd(kdList, 'TRB'),
+      kdTankSB: calculateKd(kdList, 'TSB'),
+      kdShipAB: calculateKd(kdList, 'FAB'),
+      kdShipRB: calculateKd(kdList, 'FRB'),
       totalKD: totalKd(kdList),
       aviationAirDestroyed: aviationAirDestroyedAB + aviationAirDestroyedRB + aviationAirDestroyedSB,
       aviationGroundDestroyed: aviationGroundDestroyedAB + aviationGroundDestroyedRB + aviationGroundDestroyedSB,
@@ -253,6 +253,10 @@ class GetDataProvider with ChangeNotifier {
       gameModesChart: battleNumbersChart,
       typeOfVehicleChart: typeOfVehicleChart,
       researchedVehicleChart: researchedVehicleChart,
+      favoriteGameMode: favoriteGameMode(kdList),
+      favoriteVehicleType: favoriteVehicleType(typeOfVehicleChart),
+      favoriteNation: favoriteNation(researchedVehicleChart),
+      spadedPercent: spadedPercent(researchedVehicleChart),
     );
 
     //TODO: Handle possible exception (try/catch)
@@ -260,6 +264,7 @@ class GetDataProvider with ChangeNotifier {
     return player;
   }
 
+  // TODO: separate to helper class
   int countAccYears(String regDate) {
     final parsedDate = DateFormat('dd.MM.yyyy').parse(regDate.replaceAll('Registration date ', ''));
     final days = DateTime.now().difference(parsedDate).inDays;
@@ -327,5 +332,69 @@ class GetDataProvider with ChangeNotifier {
   double calculateKd(List<KillDeath> kdList, String modeName) {
     final mode = kdList.where((e) => e.modeName == modeName).single;
     return mode.killNumber / mode.battleNumber;
+  }
+
+  String favoriteGameMode(List<KillDeath> kdList) {
+    int result = 0;
+    for (final e in kdList) {
+      if (e.battleNumber > result) {
+        result = e.battleNumber;
+      }
+    }
+
+    return kdList.where((e) => e.battleNumber == result).first.modeName;
+  }
+
+  String favoriteVehicleType(List<ChartData> typeOfVehicleChart) {
+    int result = 0;
+    for (final element in typeOfVehicleChart) {
+      if (element.y > result) {
+        result = element.y;
+      }
+    }
+    return typeOfVehicleChart.where((e) => e.y == result).first.x;
+  }
+
+  String favoriteNation(List<ChartData> researchedVehicleChart) {
+    int result = 0;
+    for (final element in researchedVehicleChart) {
+      if (element.y1 > result) {
+        result = element.y1;
+      }
+    }
+    final name = researchedVehicleChart.where((e) => e.y1 == result).first.x;
+    switch (name) {
+      case 'USA':
+        return 'usa';
+      case 'GER':
+        return 'germany';
+      case 'USR':
+        return 'ussr';
+      case 'GBR':
+        return 'britain';
+      case 'JAP':
+        return 'japan';
+      case 'ITA':
+        return 'italy';
+      case 'FRA':
+        return 'france';
+      case 'CHI':
+        return 'china';
+      case 'SWE':
+        return 'sweden';
+      default:
+        return 'usa';
+    }
+  }
+
+  int spadedPercent(List<ChartData> researchedVehicleChart) {
+    int researched = 0;
+    int spaded = 0;
+    for (final element in researchedVehicleChart) {
+      researched = researched + element.y1;
+      spaded = spaded + element.y2;
+    }
+
+    return ((spaded / researched) * 100).toInt();
   }
 }

@@ -21,7 +21,7 @@ class TileStackedBarChart extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        height: 300,
+        height: 500,
         child: Column(
           children: [
             const SizedBox(height: 10),
@@ -33,23 +33,26 @@ class TileStackedBarChart extends StatelessWidget {
             Flexible(
               child: SfCartesianChart(
                 primaryXAxis: CategoryAxis(),
-                primaryYAxis: NumericAxis(),
+                primaryYAxis: NumericAxis(maximum: 400),
                 tooltipBehavior: TooltipBehavior(enable: true),
                 series: [
                   BarSeries<ChartData, String>(
                     dataSource: listData,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => data.y2,
+                    name: 'Spaded',
                   ),
                   BarSeries<ChartData, String>(
                     dataSource: listData,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => data.y1,
+                    name: 'Researched',
                   ),
                   BarSeries<ChartData, String>(
                     dataSource: listData,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => data.y,
+                    name: 'Available for research',
                   ),
                 ],
               ),
